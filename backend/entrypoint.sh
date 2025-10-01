@@ -27,6 +27,17 @@ if [ -f tmp/pids/server.pid ]; then
   rm tmp/pids/server.pid
 fi
 
+# Fix bundle platforms for development
+if [ "$RAILS_ENV" = "development" ]; then
+  echo "Fixing bundle platforms for development..."
+  bundle lock --add-platform aarch64-linux-musl
+  bundle lock --add-platform ruby
+fi
+
+# Run database migrations
+echo "Running database migrations..."
+bin/rails db:create db:migrate
+
 # Execute the provided command
 echo "Starting Rails application..."
 exec "$@"

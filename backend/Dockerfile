@@ -5,6 +5,7 @@ FROM ruby:3.2-alpine AS builder
 RUN apk add --no-cache \
     build-base \
     postgresql-dev \
+    yaml-dev \
     git
 
 # Set working directory
@@ -14,7 +15,9 @@ WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 
 # Install gems
-RUN bundle config --global frozen 1 && \
+RUN bundle lock --add-platform aarch64-linux-musl && \
+    bundle lock --add-platform ruby && \
+    bundle config --global frozen 1 && \
     bundle install --jobs 4 --retry 3
 
 # Stage 2: Production
@@ -38,14 +41,20 @@ COPY --from=builder /usr/local/bundle /usr/local/bundle
 # Copy application code
 COPY --chown=app:app . .
 
+# Make scripts executable
+RUN chmod +x entrypoint.sh bin/rails bin/rake bin/setup
+
 # Switch to app user
 USER app
 
 # Expose port
 EXPOSE 3000
 
+# Set entrypoint
+ENTRYPOINT ["./entrypoint.sh"]
+
 # Default command
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["bin/rails", "server", "-b", "0.0.0.0"]
 
 # Stage 3: Development
 FROM builder AS development
@@ -62,11 +71,17 @@ WORKDIR /app
 # Copy application code
 COPY . .
 
+# Make scripts executable
+RUN chmod +x entrypoint.sh bin/rails bin/rake bin/setup
+
 # Create directories for volumes
 RUN mkdir -p tmp/pids tmp/cache tmp/sockets log
 
 # Expose port
 EXPOSE 3000
 
+# Set entrypoint
+ENTRYPOINT ["./entrypoint.sh"]
+
 # Default command for development
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["bin/rails", "server", "-b", "0.0.0.0"]

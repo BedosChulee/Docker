@@ -70,5 +70,6 @@ volumes:
 networks:
   database:
     driver: bridge
+    internal: true
   backend:
     driver: bridge
