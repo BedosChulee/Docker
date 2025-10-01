@@ -45,8 +45,9 @@ USER app
 EXPOSE 3000
 
 # Default command
-CMD ["rails", "server", "-b", "0.0.0.0"]# Stage 3: 
-Development
+CMD ["rails", "server", "-b", "0.0.0.0"]
+
+# Stage 3: Development
 FROM builder AS development
 
 # Install additional development tools
