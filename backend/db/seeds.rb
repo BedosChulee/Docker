@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # Create sample users
-user1 = User.create!(
+=begin user1 = User.create!(
   name: "John Doe",
   email: "john@example.com"
 )
@@ -30,4 +30,4 @@ Post.create!(
   user: user2
 )
 
-puts "Created #{User.count} users and #{Post.count} posts"
+puts "Created #{User.count} users and #{Post.count} posts" =end

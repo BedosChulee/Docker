@@ -15,8 +15,7 @@ WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 
 # Install gems
-RUN bundle lock --add-platform aarch64-linux-musl && \
-    bundle lock --add-platform ruby && \
+RUN bundle lock --add-platform ruby && \
     bundle config --global frozen 1 && \
     bundle install --jobs 4 --retry 3
 
@@ -72,7 +71,8 @@ WORKDIR /app
 COPY . .
 
 # Make scripts executable
-RUN chmod +x entrypoint.sh bin/rails bin/rake bin/setup
+RUN bundle config --global deployment false && \
+    chmod +x entrypoint.sh bin/rails bin/rake bin/setup
 
 # Create directories for volumes
 RUN mkdir -p tmp/pids tmp/cache tmp/sockets log
