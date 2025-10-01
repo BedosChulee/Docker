@@ -1,0 +1,10 @@
+.env
+.env.dev
+.env.prod
+secrets/*
+!secrets/.gitkeep
+node_modules/
+frontend/node_modules/
+frontend/.next/
+backend/log/
+backend/tmp/
