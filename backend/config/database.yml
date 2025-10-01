@@ -27,7 +27,7 @@ development:
   port: <%= ENV.fetch("DATABASE_PORT", "5432") %>
   database: <%= ENV.fetch("DATABASE_NAME", "backend_development") %>
   username: <%= ENV.fetch("DATABASE_USER", "postgres") %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD", "") %>
+  password: <%= ENV["POSTGRES_PASSWORD_FILE"] ? File.read(ENV["POSTGRES_PASSWORD_FILE"]).strip : ENV.fetch("DATABASE_PASSWORD", "") %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
