@@ -11,6 +11,17 @@ services:
     environment:
       RAILS_ENV: development
 
+  frontend:
+    build:
+      target: development
+    profiles:
+      - dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
+
   adminer:
     image: adminer:4.8.1
     profiles:
