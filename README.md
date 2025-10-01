@@ -1,8 +1,7 @@
 # Projet Docker J3 - Stack Production-Ready
 ## Membres du groupe
-- Prénom Nom
-- Prénom Nom
-- Prénom Nom
+- Chulee Bedos
+- Sofiane Aboulkabila
 ## Architecture
 Rails API + Next.js + PostgreSQL + Nginx
 ## Lancement
