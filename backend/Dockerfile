@@ -71,8 +71,7 @@ WORKDIR /app
 COPY . .
 
 # Make scripts executable
-RUN bundle config --global deployment false && \
-    chmod +x entrypoint.sh bin/rails bin/rake bin/setup
+RUN chmod +x entrypoint.sh bin/rails bin/rake bin/setup
 
 # Create directories for volumes
 RUN mkdir -p tmp/pids tmp/cache tmp/sockets log
