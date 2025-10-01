@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     build: ./database
@@ -39,4 +37,3 @@ volumes:
 networks:
   database:
     driver: bridge
-    internal: true
