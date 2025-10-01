@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::API
-  # Base controller for API endpoints
-  # Provides common functionality for all API controllers
   
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
