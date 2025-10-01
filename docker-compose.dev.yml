@@ -1,6 +1,16 @@
 version: '3.8'
 
 services:
+  backend:
+    build:
+      target: development
+    profiles:
+      - dev
+    volumes:
+      - ./backend:/app
+    environment:
+      RAILS_ENV: development
+
   adminer:
     image: adminer:4.8.1
     profiles:
