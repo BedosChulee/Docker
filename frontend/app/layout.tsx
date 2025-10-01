@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Docker App',
+  title: 'Blog App',
   description: 'A simple blog application built with Next.js and Rails',
 }
 
@@ -16,9 +17,7 @@ export default function RootLayout({
       <body>
         <header>
           <nav>
-            <a href="/">Home</a>
-            <a href="/posts">Posts</a>
-            <a href="/users">Utilisateurs</a>
+            <Link href="/">Home</Link>
           </nav>
         </header>
         <main>{children}</main>
